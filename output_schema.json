@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "themes": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string", "minLength": 1, "maxLength": 100},
+          "observation": {"type": "string", "minLength": 1, "maxLength": 600},
+          "evidence_video_ids": {"type": "array", "minItems": 2, "maxItems": 10, "uniqueItems": true, "items": {"type": "string"}}
+        },
+        "required": ["name", "observation", "evidence_video_ids"]
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "video_id": {"type": "string"},
+          "category": {"type": "string", "enum": ["meme", "brand"]},
+          "topic": {"type": "string", "minLength": 1, "maxLength": 600},
+          "summary": {"type": "string", "minLength": 1, "maxLength": 600},
+          "recommendation_reason": {"type": "string", "minLength": 1, "maxLength": 600},
+          "adaptation_idea": {"type": "string", "minLength": 1, "maxLength": 600},
+          "confidence": {"type": "string", "enum": ["low", "medium", "high"]}
+        },
+        "required": ["video_id", "category", "topic", "summary", "recommendation_reason", "adaptation_idea", "confidence"]
+      }
+    }
+  },
+  "required": ["themes", "recommendations"]
+}
